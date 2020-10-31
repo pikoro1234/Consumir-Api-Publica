@@ -1,0 +1,89 @@
+html body{
+    background-color: #F1EEED!important;
+}
+
+html body .backgroud-spiner{
+    background-color: #000;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 0.3;
+    z-index: 1;    
+    visibility: hidden;    
+}
+
+html body .spiner-load{
+    width: 15%;
+    margin: 20px auto;
+    font-size: 28px;
+    position: relative;
+    color: #fff;
+    z-index: 4;
+    visibility: hidden;
+    margin-top: 120px;
+}
+
+html body .content-botones .card{
+    width: 70%;
+    margin: 10px auto;
+}
+
+html body .content-botones .card .card-body{
+    display: flex;
+    justify-content: space-between;
+}
+
+html body .main{
+    margin-top: 50px;
+}
+
+html body .main .contenido-datos{
+    width: 90%;
+    margin: 10px auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+html body .main .contenido-datos .card{
+    width: 30%!important;
+}
+
+html body .main .contenido-datos .card .card-body h3:hover{
+    color: #C7C4CB;
+}
+
+html body .main .contenido-datos .tarjetas-pokemon{
+    margin: 10px;
+}
+
+html body .main .contenido-datos .tarjetas-pokemon .imagen,
+html body .main .contenido-datos .tarjetas-pokemon .background-black,
+html body .main .contenido-datos .tarjetas-pokemon .image,
+html body .main .contenido-datos .tarjetas-pokemon .image a{
+    height: 200px;    
+}
+
+html body .main .contenido-datos .tarjetas-pokemon .background-black:hover{
+    background-color: #C7C4CB;
+
+}
+
+html body .main .contenido-datos .tarjetas-pokemon .background-black .image a .imagen{
+    object-fit: contain;
+}
+
+html body .modal .modal-dialog .modal-content .modal-header .modal-title:hover{
+    color: #C7C4CB;
+}
+
+html body .modal .modal-dialog .modal-content .modal-body .contenido-detalles-pokemon ul li h3:hover{
+    color: #C7C4CB;
+}
+
+html body .modal .modal-dialog .modal-content .modal-body .contenido-detalles-pokemon ul li{
+    list-style: none;
+}
+
