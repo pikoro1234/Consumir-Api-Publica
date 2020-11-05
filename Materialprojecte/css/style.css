@@ -38,6 +38,11 @@ html body .main{
     margin-top: 20px;
 }
 
+html body .main .contenido-lista{
+    width: 80%;
+    margin: 10px auto;
+}
+
 html body .main .contenido-datos{
     width: 90%;
     margin: 10px auto;

@@ -1,6 +1,17 @@
+//variables universales
+let pokemons = [];
+
+let cadenaTabla ="";
+
 $("#lista-pokemon").click(function(){
 
-    let pokemons = [];
+    let tablaPokemons = document.querySelector(".contenido-lista");
+
+    $(tablaPokemons).css('display','block');
+
+    let cardPokemons = document.querySelector(".contenido-datos");
+
+    $(cardPokemons).css('display','none');
 
     //ajaxPokemon
     let urlPokemons = "js/data/pokemon.json";

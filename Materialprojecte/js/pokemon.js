@@ -2,6 +2,16 @@ let arrayDatos =[];
 
 const traerPokemon = () =>{ 
 
+  let tablaPokemons = document.querySelector(".contenido-lista");
+
+  $(tablaPokemons).css('display','none');
+
+  let cardPokemons = document.querySelector(".contenido-datos");
+
+  $(cardPokemons).css('display','flex');
+
+
+  /*spiner*/
   let spiner = document.querySelector(".spiner-load");
 
   let backgroundSpiner = document.querySelector(".backgroud-spiner"); 
@@ -17,6 +27,7 @@ const traerPokemon = () =>{
     $(backgroundSpiner).css('visibility','hidden');
     
   }, 4000);
+  /*spiner*/
 
   fetch('js/data/pokemon.json')
   .then(response => response.json())
