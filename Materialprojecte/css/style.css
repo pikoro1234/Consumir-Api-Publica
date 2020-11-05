@@ -16,13 +16,12 @@ html body .backgroud-spiner{
 
 html body .spiner-load{
     width: 15%;
-    margin: 20px auto;
+    margin: 0px auto;
     font-size: 28px;
     position: relative;
     color: #fff;
     z-index: 4;
     visibility: hidden;
-    margin-top: 120px;
 }
 
 html body .content-botones .card{
@@ -36,7 +35,7 @@ html body .content-botones .card .card-body{
 }
 
 html body .main{
-    margin-top: 50px;
+    margin-top: 20px;
 }
 
 html body .main .contenido-datos{

@@ -16,7 +16,7 @@ const traerPokemon = () =>{
 
     $(backgroundSpiner).css('visibility','hidden');
     
-  }, 3000);
+  }, 4000);
 
   fetch('js/data/pokemon.json')
   .then(response => response.json())
