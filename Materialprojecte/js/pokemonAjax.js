@@ -17,9 +17,9 @@ let cuerpoTabla = document.querySelector(".cuerpo-pokemon");
 
 let modalContenedor = document.querySelector(".modalPokemos");
 
-
+//creacion de spiner
 const creacionSpiner = () =>{
-    /*spiner*/
+    
     let spiner = document.querySelector(".spiner-load");
 
     let backgroundSpiner = document.querySelector(".backgroud-spiner"); 
@@ -35,13 +35,10 @@ const creacionSpiner = () =>{
         $(backgroundSpiner).css('visibility','hidden');
         
     }, 4000);
-    /*spiner*/
 }
 
-//boton de pokemon para listarlos
-$("#lista-pokemon").click(function(){ 
-    
-    creacionSpiner();
+//funcion traer pokemons del json
+const traerPokemons = () =>{
 
     $(tablaPokemons).css('display','block');
 
@@ -61,15 +58,14 @@ $("#lista-pokemon").click(function(){
 	})
 	.done(function(data){
         
-        llenarPokemons(data);
+        llenarPokemons(data.pokemon);
     });//fin ajax
-    
-});//fin click lista pokemon
+}
 
 //funcion llenar pokemons a la tabla
 const llenarPokemons = (datos) =>{
 
-    pokemons = datos.pokemon;
+    pokemons = datos;
 
     cabeceraTabla.innerHTML = "";
 
@@ -104,14 +100,55 @@ const llenarPokemons = (datos) =>{
 
 }//fin function llenarPokemons
 
+
+//boton de pokemon para listarlos
+$("#lista-pokemon").click(function(){ 
+
+    creacionSpiner();
+
+    traerPokemons();
+
+});//fin click lista pokemon
+
+
 //funcion datos para detalle de cada pokemon
 const modalPokemon = (idPokemon) =>{
 
     modalContenedor.innerHTML = "";
 
+    let evolucion = "";
+
+    let debilidades = ""; 
+
     for(let poked of pokemons){
 
         if (poked.id === idPokemon) {
+
+            if(poked.weaknesses){
+
+                poked.weaknesses.forEach(value =>{
+
+                    debilidades+= "  |  " + value;
+
+                });
+
+            }else{
+
+                debilidades = "sin debilidades";
+            }
+
+            if (poked.next_evolution) {
+
+                poked.next_evolution.forEach(value =>{
+
+                  evolucion += "  |  " + value["name"];
+
+                }); 
+
+            }else{
+
+                evolucion = "sin evoluciones";
+            }
 
             modalContenedor.innerHTML +=`
                 <div class="modal-header">
@@ -127,11 +164,12 @@ const modalPokemon = (idPokemon) =>{
                     <img src="${poked.img}" class="rounded mx-auto d-block" alt="...">
                     <div class="pokemon-modal-cuerpo">
                         <ul>
-                            <li><h3 class="card-title">${poked.name}</h3></li>
-                            <li><p class="card-title">${poked.candy}</p></li>
+                            <li><h3 class="card-title">${poked.name}</h3></li>                            
                             <li><p class="card-title">${poked.height}</p></li>
                             <li><p class="card-title">${poked.weight}</p></li>
-                            <li><p class="card-title">${poked.type[0]}</p></li>
+                            <li><p class="card-title">Tiempo regeneración -> ${poked.spawn_time}</p></li>                            
+                            <li><p class="card-title">Evoluciones -> ${evolucion}</p></li>
+                            <li><p class="card-title">Debilidades -> ${debilidades}</p></li>
                         </ul>
                     </div>                         
                 </div>
@@ -147,58 +185,6 @@ const modalPokemon = (idPokemon) =>{
 }//fin function modalPokemon
 
 
-/*
-"num": "001",
-    "name": "Bulbasaur",
-    "img": "http://www.serebii.net/pokemongo/pokemon/001.png",
-    "type": [
-      "Grass",
-      "Poison"
-    ],
-    "height": "0.71 m",
-    "weight": "6.9 kg",
-    "candy": "Bulbasaur Candy",
-    "candy_count": 25,
-    "egg": "2 km",
-    "spawn_chance": 0.69,
-    "avg_spawns": 69,
-    "spawn_time": "20:00",
-    "multipliers": [1.58],
-    "weaknesses": [
-      "Fire",
-      "Ice",
-      "Flying",
-      "Psychic"
-    ],
-    "next_evolution": [{
-      "num": "002",
-      "name": "Ivysaur"
-    }, {
-      "num": "003",
-      "name": "Venusaur"
-    }]
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //boton de ordenar
 $(".btn-ordenar").click(function(){
 
@@ -206,7 +192,6 @@ $(".btn-ordenar").click(function(){
 
     $(btnBuscar).css('display','none');
 });
-
 
 
 //boton de buscar
@@ -217,3 +202,63 @@ $(".btn-buscar").click(function(){
     $(btnOrdenar).css('display','none');
 
 });
+
+
+//boton ordenar 
+$("#button-addon1").click(function(){
+
+    let inputOrdenar = document.querySelector(".input-ordenar").value;
+
+    if (inputOrdenar.length === 0) {
+        
+        alert("el campo no debe estar vacio");
+    }else{
+
+        if(inputOrdenar !== "asc" && inputOrdenar !== "desc"){
+        
+            alert("el campo debe tener la palabra 'asc' o 'desc'");
+        }
+
+    }
+
+    if (inputOrdenar === "desc") {
+
+        creacionSpiner();
+
+        pokemons.reverse();
+
+        llenarPokemons(pokemons);
+    }
+
+    if (inputOrdenar === "asc") {
+        
+        creacionSpiner();
+
+        pokemons.reverse().sort();
+
+        llenarPokemons(pokemons);
+    }
+
+});
+
+
+// boton buscar
+$("#button-addon2").click(function(){
+
+    let inputBuscar = document.querySelector(".input-buscar").value;
+
+    //alert(pokemons.name.substr(0,1));
+
+    if (inputBuscar.length === 0 || inputBuscar.length > 1) {
+
+        alert("solo debe introducir un caracter");
+    }
+
+    let arrayFiltrado = pokemons.filter(valor => valor.name.substr(0,1) == inputBuscar.toUpperCase());
+
+    creacionSpiner();
+    
+    llenarPokemons(arrayFiltrado);
+
+});
+
