@@ -21,14 +21,14 @@
 					<button type="button" id="lista-pokemon" class="btn btn-outline-secondary">
 						Pokemon
 					</button>
-					<button type="button" class="btn btn-outline-secondary">
-						Ordenar(Asc)
+					<button type="button" class="btn btn-outline-secondary btn-ordenar">
+						Ordenar
 					</button>
-					<button type="button" class="btn btn-outline-secondary">
-						Ordenar(Desc)
-					</button>
-					<button type="button" class="btn btn-outline-secondary">
+					<button type="button" class="btn btn-outline-secondary btn-buscar">
 						Filtrar(Filter)
+					</button>
+					<button type="button" class="btn btn-outline-secondary">
+						Peliculas
 					</button>
 					<button type="button" class="btn btn-outline-secondary">Peliculas A</button>
 				</div>
@@ -43,25 +43,26 @@
 
 		<div class="main">
 			<div class="contenido-lista">
+				<div class="input-group mb-3 ordenar">
+					<div class="input-group-prepend">
+					  <button class="btn btn-outline-secondary" type="button" id="button-addon1">Ordenar</button>
+					</div>
+					<div class="input-group-prepend">
+						<input type="text" class="form-control" placeholder="palabra clave" aria-label="Example text with button addon" aria-describedby="button-addon1">
+					</div>										
+				</div>
+
+				<div class="input-group mb-3 buscar">
+					<div class="input-group-prepend">
+					  <button class="btn btn-outline-secondary" type="button" id="button-addon2">Buscar</button>
+					</div>
+					<div class="input-group-prepend">
+						<input type="text" class="form-control" placeholder="Buscar..." aria-label="Example text with button addon" aria-describedby="button-addon1">
+					</div>										
+				</div>
 				<table class="table table-striped table-dark tabla-pokemon">
-					<thead class="cabecera-pokemon">
-					  <tr>
-						<th scope="col">#</th>
-						<th scope="col">Foto</th>
-						<th scope="col">Nombr</th>
-						<th scope="col">Peso</th>
-						<th scope="col">Detalles</th>
-					  </tr>
-					</thead>
-					<tbody class="cuerpo-pokemon">
-					  <tr>
-						<th scope="row">1</th>
-						<td>Mark</td>
-						<td>Otto</td>
-						<td>@mdo</td>
-						<td><button type="button" class="btn btn-light">Detalles</button></td>
-					  </tr>
-					</tbody>
+					<thead class="cabecera-pokemon"></thead>
+					<tbody class="cuerpo-pokemon"></tbody>
 				</table>
 			</div>
 			<div class="contenido-datos"></div>
@@ -81,8 +82,7 @@
 				...
 				</div>
 				<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>				
 				</div>
 			</div>
 			</div>			

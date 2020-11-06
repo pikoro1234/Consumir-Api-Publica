@@ -38,6 +38,11 @@ html body .main{
     margin-top: 20px;
 }
 
+html body .main .contenido-lista .ordenar,
+html body .main .contenido-lista .buscar{
+    display: none;
+} 
+
 html body .main .contenido-lista{
     width: 80%;
     margin: 10px auto;
