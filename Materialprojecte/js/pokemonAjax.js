@@ -7,6 +7,10 @@ let arrayBidimensional = [];
 
 let arrayTemporalBidimensional = [];
 
+let arrayModificadoArray = [];
+
+let arrayTemporalModificado = [];
+
 let cadenaTabla ="";
 
 let btnOrdenar = document.querySelector(".ordenar");
@@ -204,6 +208,8 @@ $(".btn-ordenar").click(function(){
 
         $(btnBuscar).css('display','none');
 
+        $(".calculo").css('display','none');
+
     }
     
 });
@@ -215,12 +221,14 @@ $(".btn-buscar").click(function(){
     if (pokemons.length ===0) {
 
         alert("primero ejecuta 'LISTA POKEMON' para obtener datos");
-        
+
     }else{
 
         $(btnBuscar).css('display','flex');
 
         $(btnOrdenar).css('display','none');
+
+        $(".calculo").css('display','none');
 
     }    
 
@@ -259,7 +267,7 @@ $("#button-addon1").click(function(){
             
             creacionSpiner();
 
-            arrayPokemons.reverse().sort();
+            arrayPokemons.sort((a, b) => a - b);
 
             llenarPokemons(arrayPokemons);
         }
@@ -368,8 +376,6 @@ const creacionArrayBidimensional = (datosPokemonesArray) =>{
 //funcion crea tabla de array de arrays de dos elementos 
 const escrituraNuevaTabla = (arrayBidimensional) =>{
 
-    console.log(arrayBidimensional);
-
     let contador = 0;
 
     document.write("<table class='table table-striped'>");
@@ -414,3 +420,83 @@ $(".btn-arrayBidimensional").click(function(){
 
 });
 
+
+//metodo arrayModificado
+
+const arrayModificado = (arrayModificar) =>{
+
+   if (arrayModificar.length === 0) {
+
+        alert("primero ejecuta 'LISTA POKEMON' para obtener datos");
+
+    }else{
+
+        for(let elem of arrayModificar){
+
+            let peso = elem.weight.split(" ",1).toString();
+
+            let pesoConvert = parseFloat(peso,10);
+
+            arrayTemporalModificado = new Array(elem.name,elem.img,pesoConvert);
+
+            arrayModificadoArray.push(arrayTemporalModificado);
+            
+        }
+
+        creacionSpiner();
+
+        pintadoTablaModificada(arrayModificadoArray);
+    }
+    
+}
+
+
+//metodo nueva tabla para pintar datos modificados del array
+pintadoTablaModificada = (datos) =>{
+
+    cabeceraTabla.innerHTML = "";
+
+    cabeceraTabla.innerHTML += `
+    <tr>
+        <th scope="col">Foto</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Peso</th>
+    </tr>`;
+
+    cuerpoTabla.innerHTML = "";
+
+    for(let pokecito of datos){
+
+        cuerpoTabla.innerHTML += `
+        <tr>        
+            <td><img src='${pokecito[1]}' class='rounded' alt='...'></img></td>
+            <td>${pokecito[0]}</td>
+            <td>${pokecito[2]}</td>
+        </tr>`;
+
+    }
+}
+
+//boton arrayModificado 
+$(".btn-arrayModificado").click(function(){
+
+    arrayModificado(pokemons);
+});
+
+
+//boton calculo media 
+$(".btn-calculo-media").click(function(){
+
+    if (arrayModificadoArray.length === 0) {
+        
+        alert("primero ejecuta 'ARRAY MODIFICADO' para obtener datos")
+    }else{
+
+        $(btnOrdenar).css('display','none');
+
+        $(btnBuscar).css('display','none');
+
+        $(".calculo").css('display','flex');
+    }
+    
+})

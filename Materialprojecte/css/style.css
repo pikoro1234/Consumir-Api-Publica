@@ -39,7 +39,8 @@ html body .main{
 }
 
 html body .main .contenido-lista .ordenar,
-html body .main .contenido-lista .buscar{
+html body .main .contenido-lista .buscar,
+html body .main .contenido-lista .calculo{
     display: none;
 } 
 
