@@ -2,6 +2,26 @@ html body{
     background-color: #F1EEED!important;
 }
 
+.background-modal{
+    background-color: #000;
+    opacity: 0.5;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: fixed;
+    z-index: 100;
+}
+
+.modal-inicio{
+    z-index: 200;
+    position:absolute;
+    top: 100px;
+    left: 300px;
+    right: 300px;
+    bottom: 300px;
+}
+
 html body .backgroud-spiner{
     background-color: #000;
     position: fixed;

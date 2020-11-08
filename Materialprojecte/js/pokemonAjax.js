@@ -27,6 +27,18 @@ let cuerpoTabla = document.querySelector(".cuerpo-pokemon");
 
 let modalContenedor = document.querySelector(".modalPokemos");
 
+
+//cerrar modal de inicio
+$(".btn-cerrar").click(function(){
+
+    $(".background-modal").css('display','none');
+
+    $(".modal-inicio").css('display','none');
+
+});
+
+
+
 //creacion de spiner
 const creacionSpiner = () =>{
     
@@ -477,11 +489,35 @@ pintadoTablaModificada = (datos) =>{
     }
 }
 
+
+
 //boton arrayModificado 
 $(".btn-arrayModificado").click(function(){
 
     arrayModificado(pokemons);
 });
+
+
+
+//metodo calculo de la media
+const calculoMedia = (datos) =>{
+
+    let sumas = 0;
+
+    let total = 0;
+
+    for(let elemSup of datos){
+        for(let elem of datos){
+            sumas = sumas + elemSup[2];
+        }
+    }
+
+    total = sumas / datos.length;
+
+    $(".input-media").attr("placeholder","media es: "+total.toFixed(2));
+
+}
+ 
 
 
 //boton calculo media 
@@ -491,6 +527,8 @@ $(".btn-calculo-media").click(function(){
         
         alert("primero ejecuta 'ARRAY MODIFICADO' para obtener datos")
     }else{
+
+        calculoMedia(arrayModificadoArray);
 
         $(btnOrdenar).css('display','none');
 
