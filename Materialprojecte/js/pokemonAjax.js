@@ -1,6 +1,12 @@
 //variables universales
 let pokemons = [];
 
+let arrayFiltrado = [];
+
+let arrayBidimensional = [];
+
+let arrayTemporalBidimensional = [];
+
 let cadenaTabla ="";
 
 let btnOrdenar = document.querySelector(".ordenar");
@@ -188,18 +194,35 @@ const modalPokemon = (idPokemon) =>{
 //boton de ordenar
 $(".btn-ordenar").click(function(){
 
-    $(btnOrdenar).css('display','flex');
+    if (pokemons.length ===0) {
 
-    $(btnBuscar).css('display','none');
+        alert("primero ejecuta 'LISTA POKEMON' para obtener datos");
+
+    }else{
+
+        $(btnOrdenar).css('display','flex');
+
+        $(btnBuscar).css('display','none');
+
+    }
+    
 });
 
 
 //boton de buscar
 $(".btn-buscar").click(function(){
 
-    $(btnBuscar).css('display','flex');
+    if (pokemons.length ===0) {
 
-    $(btnOrdenar).css('display','none');
+        alert("primero ejecuta 'LISTA POKEMON' para obtener datos");
+        
+    }else{
+
+        $(btnBuscar).css('display','flex');
+
+        $(btnOrdenar).css('display','none');
+
+    }    
 
 });
 
@@ -209,35 +232,41 @@ $("#button-addon1").click(function(){
 
     let inputOrdenar = document.querySelector(".input-ordenar").value;
 
-    if (inputOrdenar.length === 0) {
-        
-        alert("el campo no debe estar vacio");
-    }else{
+    const ordenarPokemos = (arrayPokemons,caracterBuscar) =>{    
 
-        if(inputOrdenar !== "asc" && inputOrdenar !== "desc"){
-        
-            alert("el campo debe tener la palabra 'asc' o 'desc'");
+        if (caracterBuscar.length === 0) {
+            
+            alert("el campo no debe estar vacio");
+        }else{
+
+            if(caracterBuscar !== "asc" && caracterBuscar !== "desc"){
+            
+                alert("el campo debe tener la palabra 'asc' o 'desc'");
+            }
+
+        }
+
+        if (caracterBuscar === "desc") {
+
+            creacionSpiner();
+
+            arrayPokemons.reverse();
+
+            llenarPokemons(arrayPokemons);
+        }
+
+        if (caracterBuscar === "asc") {
+            
+            creacionSpiner();
+
+            arrayPokemons.reverse().sort();
+
+            llenarPokemons(arrayPokemons);
         }
 
     }
 
-    if (inputOrdenar === "desc") {
-
-        creacionSpiner();
-
-        pokemons.reverse();
-
-        llenarPokemons(pokemons);
-    }
-
-    if (inputOrdenar === "asc") {
-        
-        creacionSpiner();
-
-        pokemons.reverse().sort();
-
-        llenarPokemons(pokemons);
-    }
+    ordenarPokemos(pokemons,inputOrdenar);
 
 });
 
@@ -245,20 +274,143 @@ $("#button-addon1").click(function(){
 // boton buscar
 $("#button-addon2").click(function(){
 
-    let inputBuscar = document.querySelector(".input-buscar").value;
+    let validador = false;
 
-    //alert(pokemons.name.substr(0,1));
+    const buscarPokemons = (datoPokemon) =>{
 
-    if (inputBuscar.length === 0 || inputBuscar.length > 1) {
+        let inputBuscar = document.querySelector(".input-buscar").value;
 
-        alert("solo debe introducir un caracter");
+        //alert(pokemons.name.substr(0,1));
+
+        if (inputBuscar.length === 0 || inputBuscar.length > 1) {
+
+            alert("solo debe introducir un caracter");
+        }else{
+            validador = true;
+        }
+
+        arrayFiltrado = datoPokemon.filter(valor => valor.name.substr(0,1) == inputBuscar.toUpperCase());
+
     }
 
-    let arrayFiltrado = pokemons.filter(valor => valor.name.substr(0,1) == inputBuscar.toUpperCase());
+    buscarPokemons(pokemons);
 
-    creacionSpiner();
+    if (validador) {
+        
+        creacionSpiner();
     
-    llenarPokemons(arrayFiltrado);
+        llenarPokemons(arrayFiltrado);
+
+    }
+
+});//fin boton filtrar
+
+
+
+//funcion para obtener la posicion del pokemon pasado por parametro
+const posicionPokemon = (arrayPokemones) =>{
+
+    //cpopiamos el array solo para guardar los nombres de los pokemons
+    let arrayTemporal = [];
+
+    for(let nuevos of arrayPokemones){
+
+        arrayTemporal.push(nuevos.name);
+    }
+
+    let pokemonBuscar = prompt("ingresa el nombre del pokemon a buscar: ");
+
+    let elementoPokemon = arrayTemporal.indexOf(pokemonBuscar);
+
+    if (elementoPokemon === -1) {
+        
+        alert("primero ejecuta 'LISTA POKEMON' para obtener datos");
+
+    }else{
+
+        alert(`la posicion del pokemon es ${elementoPokemon}`);
+    }
+    
+}
+
+
+//boton buscar posicion de pokemon enviado por parametro
+$(".btn-posicion").click(function(){
+    
+    posicionPokemon(pokemons);
+});
+
+
+
+//funcion llenar datos arrayBidimensional
+const creacionArrayBidimensional = (datosPokemonesArray) =>{
+
+    if (datosPokemonesArray.length === 0) {
+
+        alert("primero ejecuta 'LISTA POKEMON' para obtener datos");
+
+    }else{
+
+        for(let valores of datosPokemonesArray){
+
+            arrayTemporalBidimensional = new Array(valores.name,valores.img);
+    
+            arrayBidimensional.push(arrayTemporalBidimensional);
+    
+        }
+    
+        escrituraNuevaTabla(arrayBidimensional);
+
+    }
+}
+
+
+//funcion crea tabla de array de arrays de dos elementos 
+const escrituraNuevaTabla = (arrayBidimensional) =>{
+
+    console.log(arrayBidimensional);
+
+    let contador = 0;
+
+    document.write("<table class='table table-striped'>");
+
+    document.write("<thead>");
+
+    document.write("<tr>");
+
+    document.write("<th scope='col'>nombre</th>");
+
+    document.write("<th scope='col'>imagen</th>");
+
+    document.write("</tr>");
+
+    document.write("</thead>");
+
+    document.write("<tbody>");
+
+    for(let pokedex of arrayBidimensional){
+
+        contador++;
+        document.write("<tr>");
+
+        document.write("<td>"+contador+".- "+pokedex[0]+"</td>");
+
+        document.write("<td><img src='"+pokedex[1]+"' class='rounded float-right' alt='...'></img></td>");
+
+        document.write("</tr>");
+
+    }
+    document.write("</tbody>");
+
+    document.write("</table>");
+
+}
+
+
+//boton para arrayBidimensional
+$(".btn-arrayBidimensional").click(function(){
+
+    creacionArrayBidimensional(pokemons);
 
 });
 
