@@ -16,10 +16,19 @@ html body{
 .modal-inicio{
     z-index: 200;
     position:absolute;
-    top: 100px;
+    top: 60px;
     left: 300px;
     right: 300px;
     bottom: 300px;
+}
+
+.modal-inicio .modal-dialog{
+    margin: 0px auto!important;
+    max-width: 700px!important;
+}
+
+.modal-inicio .modal-dialog .modal-content .modal-footer{
+    justify-content: space-between!important;
 }
 
 html body .backgroud-spiner{
@@ -115,5 +124,12 @@ html body .modal .modal-dialog .modal-content .modal-body .contenido-detalles-po
 
 html body .modal .modal-dialog .modal-content .modal-body .contenido-detalles-pokemon ul li{
     list-style: none;
+}
+
+html body #main .contenido-lista .calculo .input-group-prepend .input-media{
+    height: 100px;
+    width: 200px;
+    text-align: center;
+    background-color: white;
 }
 

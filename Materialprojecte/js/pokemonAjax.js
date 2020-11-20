@@ -28,7 +28,8 @@ let cuerpoTabla = document.querySelector(".cuerpo-pokemon");
 let modalContenedor = document.querySelector(".modalPokemos");
 
 
-//cerrar modal de inicio
+
+//CERRAR ,MODAL DE INICIO DOCUMENTO
 $(".btn-cerrar").click(function(){
 
     $(".background-modal").css('display','none');
@@ -39,7 +40,18 @@ $(".btn-cerrar").click(function(){
 
 
 
-//creacion de spiner
+//CERRAR ,MODAL DE INICIO DOCUMENTO
+$(".close").click(function(){
+
+    $(".background-modal").css('display','none');
+
+    $(".modal-inicio").css('display','none');
+
+});
+
+
+
+//FUCION CREACION DE SPINER
 const creacionSpiner = () =>{
     
     let spiner = document.querySelector(".spiner-load");
@@ -59,7 +71,9 @@ const creacionSpiner = () =>{
     }, 4000);
 }
 
-//funcion traer pokemons del json
+
+
+//FUNCION TRAER POKEMOS DEL JSON
 const traerPokemons = () =>{
 
     $(tablaPokemons).css('display','block');
@@ -70,9 +84,9 @@ const traerPokemons = () =>{
 
     $(btnOrdenar).css('display','none');
 
-    //ajaxPokemon
     let urlPokemons = "js/data/pokemon.json";
     
+    //AJAX QUE TRAE LOS POKEMONS
 	$.ajax({	
 
         async: false,        
@@ -84,7 +98,9 @@ const traerPokemons = () =>{
     });//fin ajax
 }
 
-//funcion llenar pokemons a la tabla
+
+
+//FUNCION LLENAR POKEMONS EN LA TABLA
 const llenarPokemons = (datos) =>{
 
     pokemons = datos;
@@ -123,8 +139,11 @@ const llenarPokemons = (datos) =>{
 }//fin function llenarPokemons
 
 
-//boton de pokemon para listarlos
-$("#lista-pokemon").click(function(){ 
+
+//BOTON EJECUTA FUNCION LLENARPOKEMONS
+$("#lista-pokemon").click(function(){
+    
+    $(".input-media").css('display','none');
 
     creacionSpiner();
 
@@ -133,7 +152,8 @@ $("#lista-pokemon").click(function(){
 });//fin click lista pokemon
 
 
-//funcion datos para detalle de cada pokemon
+
+//FUNCION EL CUAL CREA Y LLENA MODAL DE CADA POKEMON
 const modalPokemon = (idPokemon) =>{
 
     modalContenedor.innerHTML = "";
@@ -207,7 +227,8 @@ const modalPokemon = (idPokemon) =>{
 }//fin function modalPokemon
 
 
-//boton de ordenar
+
+//ELEMENTO MOSTRAR BOTON PARA EJECUTAR FUNCION ORDENAR
 $(".btn-ordenar").click(function(){
 
     if (pokemons.length ===0) {
@@ -227,7 +248,8 @@ $(".btn-ordenar").click(function(){
 });
 
 
-//boton de buscar
+
+//ELEMENTO MOSTRAR BOTON PARA EJECUTAR FUNCION BUSCAR
 $(".btn-buscar").click(function(){
 
     if (pokemons.length ===0) {
@@ -247,12 +269,15 @@ $(".btn-buscar").click(function(){
 });
 
 
-//boton ordenar 
+
+//BOTON EJECUTA FUNCION ORDERLIST 
 $("#button-addon1").click(function(){
+
+    $(".input-media").css('display','none');
 
     let inputOrdenar = document.querySelector(".input-ordenar").value;
 
-    const ordenarPokemos = (arrayPokemons,caracterBuscar) =>{    
+    const orderList = (arrayPokemons,caracterBuscar) =>{    
 
         if (caracterBuscar.length === 0) {
             
@@ -263,7 +288,6 @@ $("#button-addon1").click(function(){
             
                 alert("el campo debe tener la palabra 'asc' o 'desc'");
             }
-
         }
 
         if (caracterBuscar === "desc") {
@@ -278,7 +302,7 @@ $("#button-addon1").click(function(){
         if (caracterBuscar === "asc") {
             
             creacionSpiner();
-
+            
             arrayPokemons.sort((a, b) => a - b);
 
             llenarPokemons(arrayPokemons);
@@ -286,26 +310,28 @@ $("#button-addon1").click(function(){
 
     }
 
-    ordenarPokemos(pokemons,inputOrdenar);
+    orderList(pokemons,inputOrdenar);
 
 });
 
 
-// boton buscar
+
+//BOTON EJECUTA FUNCION FILTERLETTER
 $("#button-addon2").click(function(){
+
+    $(".input-media").css('display','none');
 
     let validador = false;
 
-    const buscarPokemons = (datoPokemon) =>{
+    const filterLetter = (datoPokemon) =>{
 
         let inputBuscar = document.querySelector(".input-buscar").value;
-
-        //alert(pokemons.name.substr(0,1));
 
         if (inputBuscar.length === 0 || inputBuscar.length > 1) {
 
             alert("solo debe introducir un caracter");
         }else{
+
             validador = true;
         }
 
@@ -313,24 +339,33 @@ $("#button-addon2").click(function(){
 
     }
 
-    buscarPokemons(pokemons);
+    filterLetter(pokemons);
 
     if (validador) {
         
         creacionSpiner();
     
         llenarPokemons(arrayFiltrado);
-
     }
 
 });//fin boton filtrar
 
 
 
-//funcion para obtener la posicion del pokemon pasado por parametro
-const posicionPokemon = (arrayPokemones) =>{
+//BOTON EJECUTA FUNCION SEARCHLIST
+$(".btn-posicion").click(function(){
 
-    //cpopiamos el array solo para guardar los nombres de los pokemons
+    $(".input-media").css('display','none');
+    
+    searchList(pokemons);
+});
+
+
+
+//FUNCION SEARCHLIST
+const searchList = (arrayPokemones) =>{
+
+    //copiamos el array solo para guardar los nombres de los pokemons
     let arrayTemporal = [];
 
     for(let nuevos of arrayPokemones){
@@ -354,15 +389,8 @@ const posicionPokemon = (arrayPokemones) =>{
 }
 
 
-//boton buscar posicion de pokemon enviado por parametro
-$(".btn-posicion").click(function(){
-    
-    posicionPokemon(pokemons);
-});
 
-
-
-//funcion llenar datos arrayBidimensional
+//CREACION DE ARRAY MULTIDIMENSIONAL
 const creacionArrayBidimensional = (datosPokemonesArray) =>{
 
     if (datosPokemonesArray.length === 0) {
@@ -385,10 +413,24 @@ const creacionArrayBidimensional = (datosPokemonesArray) =>{
 }
 
 
-//funcion crea tabla de array de arrays de dos elementos 
+
+//BOTON EJECUTA FUNCION ARRAY MULTIDIMENSIONAL
+$(".btn-arrayBidimensional").click(function(){
+
+    $(".input-media").css('display','none');
+
+    creacionArrayBidimensional(pokemons);
+
+});
+
+
+
+//CREAMOS NUEVA TABLA PARA ELEMENTOS DE ARRAY MULTIDIMENSIONAL
 const escrituraNuevaTabla = (arrayBidimensional) =>{
 
     let contador = 0;
+
+    document.write("</div>");
 
     document.write("<table class='table table-striped'>");
 
@@ -416,8 +458,8 @@ const escrituraNuevaTabla = (arrayBidimensional) =>{
         document.write("<td><img src='"+pokedex[1]+"' class='rounded float-right' alt='...'></img></td>");
 
         document.write("</tr>");
-
     }
+
     document.write("</tbody>");
 
     document.write("</table>");
@@ -425,16 +467,8 @@ const escrituraNuevaTabla = (arrayBidimensional) =>{
 }
 
 
-//boton para arrayBidimensional
-$(".btn-arrayBidimensional").click(function(){
 
-    creacionArrayBidimensional(pokemons);
-
-});
-
-
-//metodo arrayModificado
-
+//FUNCION MODIFICACION ARRAY MULTIDIMENSIONAL 
 const arrayModificado = (arrayModificar) =>{
 
    if (arrayModificar.length === 0) {
@@ -463,7 +497,8 @@ const arrayModificado = (arrayModificar) =>{
 }
 
 
-//metodo nueva tabla para pintar datos modificados del array
+
+//CREACION NUEVA TABLA ARRAY MULTIDIMENSIONAL
 pintadoTablaModificada = (datos) =>{
 
     cabeceraTabla.innerHTML = "";
@@ -491,7 +526,7 @@ pintadoTablaModificada = (datos) =>{
 
 
 
-//boton arrayModificado 
+//BOTON EJECUTA IMPLEMENTACION MODIFICACION ARRAY MULTIDIMENSIONAL  
 $(".btn-arrayModificado").click(function(){
 
     arrayModificado(pokemons);
@@ -499,7 +534,30 @@ $(".btn-arrayModificado").click(function(){
 
 
 
-//metodo calculo de la media
+//BOTON EJECUTA FUNCION CALCULO MEDIA DE TODOS LOS PESOS DE LOS POKEMONS
+$(".btn-calculo-media").click(function(){
+
+    $(".input-media").css('display','block');
+
+    if (arrayModificadoArray.length === 0) {
+        
+        alert("primero ejecuta 'ARRAY MULTIDIMENSIONAL' para obtener datos")
+    }else{
+
+        calculoMedia(arrayModificadoArray);
+
+        $(btnOrdenar).css('display','none');
+
+        $(btnBuscar).css('display','none');
+
+        $(".calculo").css('display','flex');
+    }
+    
+});
+
+
+
+//FUNCION CALCULO MEDIA DE LOS PESOS DE POKEMONS
 const calculoMedia = (datos) =>{
 
     let sumas = 0;
@@ -517,24 +575,3 @@ const calculoMedia = (datos) =>{
     $(".input-media").attr("placeholder","media es: "+total.toFixed(2));
 
 }
- 
-
-
-//boton calculo media 
-$(".btn-calculo-media").click(function(){
-
-    if (arrayModificadoArray.length === 0) {
-        
-        alert("primero ejecuta 'ARRAY MODIFICADO' para obtener datos")
-    }else{
-
-        calculoMedia(arrayModificadoArray);
-
-        $(btnOrdenar).css('display','none');
-
-        $(btnBuscar).css('display','none');
-
-        $(".calculo").css('display','flex');
-    }
-    
-})
