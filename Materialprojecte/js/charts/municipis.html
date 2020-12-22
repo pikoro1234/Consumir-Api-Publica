@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>charts municipios</title>
+    <!-- Resources -->
+    <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+
+    <!-- Styles -->
+    <style>
+        #chartdiv {
+        width: 7000px;
+        height: 500px;
+        }
+
+        .title{
+            text-align: center;
+        }
+    </style>
+</head>
+<body onload="trearDatos()">
+
+    <h1 class="title">charts con los municipios</h1>
+
+
+    <!-- HTML -->
+    <div id="chartdiv"></div>
+    
+
+<!-- implementacion de axios -->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>    
+<!-- carga script municipis -->
+<script src="./municipis.js"></script>
+
+</body>
+</html>
