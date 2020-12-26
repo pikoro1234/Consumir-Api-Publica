@@ -1,3 +1,25 @@
+let arrayPokemons = [];
+
+//obtenemos los pokemons con axios
+let obtenerDatosAxios = () =>{
+
+    axios.get('./js/data/pokemon.json',{
+
+        responseType: 'json'
+
+    }).then(function(res){
+
+        if (res.status === 200) {
+
+            creacionPokemons(res.data.pokemon);
+        }
+    })
+    .catch(function(err){
+
+        console.log(err);
+    })
+}
+
 class Pokemon {
 
     constructor(id, nombre, peso, imagen) {
@@ -12,17 +34,21 @@ class Pokemon {
     }
 }
 
-let arrayPokemons = [];
+let creacionPokemons = (datos) =>{
+
+    for(let data of datos){
+
+        arrayPokemons.push(new Pokemon(data.id,data.name,data.weight,data.img));
+    }
+
+    console.log(arrayPokemons);
+
+}
+
 
 $(".btn-pokemon-object").click(function(){
 
-    for (let index = 0; index < 10; index++) {
-    
-        console.log(new Pokemon(index,"nombre"+index,10+1,"img.jpg"+index));
-            
-    }
-
-    //console.log(arrayPokemons);
+    obtenerDatosAxios();
 
 });
 
