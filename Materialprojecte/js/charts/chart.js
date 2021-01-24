@@ -2,7 +2,7 @@ let arrayPokemons = [];
 
 am4core.ready(function() {
 
-    let url = "js/data/pokemon.json";
+    let url = "../data/pokemon.json";
 
     let response = "";
 
